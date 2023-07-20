@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stable-diffusion-webui
+  labels:
+    app: stable-diffusion-webui
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: 7860
+      targetPort: 7860
+      protocol: TCP
+      name: http
+  selector:
+    app: stable-diffusion-webui

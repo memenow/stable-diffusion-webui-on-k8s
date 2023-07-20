@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stable-diffusion-webui
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: stable-diffusion-webui
+  template:
+    metadata:
+      labels:
+        app: stable-diffusion-webui
+    spec:
+      volumes:
+        - name: sd-models
+          persistentVolumeClaim:
+            claimName: sd-models
+        - name: sd-datasets
+          persistentVolumeClaim:
+            claimName: sd-datasets
+      initContainers:
+        - name: init-models
+          image: {{ .Values.image.initContainer }}
+          command:
+            - chown
+            - '-R'
+            - '1000:1000'
+            - /content/stable-diffusion-webui/models/
+            - /datasets
+          resources: {}
+          volumeMounts:
+            - name: sd-models
+              mountPath: /content/stable-diffusion-webui/models/
+            - name: sd-datasets
+              mountPath: /datasets
+      containers:
+        - name: stable-diffusion-webui
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          command:
+            - /bin/bash
+          args:
+            - '-c'
+            - >-
+              cd /content/stable-diffusion-webui && python webui.py
+              --administrator --xformers  --update-all-extensions --no-half
+              --precision full --disable-nan-check 
+          resources:
+            limits:
+              nvidia.com/gpu: '1'
+          volumeMounts:
+            - name: sd-models
+              mountPath: /content/stable-diffusion-webui/models/
+            - name: sd-datasets
+              mountPath: /datasets
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+  strategy:
+    type: Recreate

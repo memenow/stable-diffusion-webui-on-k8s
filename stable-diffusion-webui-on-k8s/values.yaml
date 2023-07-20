@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image:
+  initContainer: alpine:3.17.3
+  repository: ghcr.io/billduke13/stable-diffusion-webui
+  tag: main
+
+pvc:
+  dataset:
+    storage: 80Gi
+  model:
+    storage: 150Gi
+
+service:
+  type: NodePort
