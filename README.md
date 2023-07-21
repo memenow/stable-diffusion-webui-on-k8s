@@ -5,7 +5,9 @@ stable diffusion webui on k8s
 
 - nvidia GPU
 
-- default storage classe
+- default StorageClass
+
+- [Helm CLI](https://github.com/helm/helm)
 
 ## Quick-Start
 
