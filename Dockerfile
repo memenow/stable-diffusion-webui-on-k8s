@@ -54,11 +54,11 @@ ADD --chown=machinelearning https://huggingface.co/ckpt/ControlNet/resolve/main/
 
 RUN sed -i -e '''/    prepare_environment()/a\    os.system\(f\"""sed -i -e ''\"s/dict()))/dict())).cuda()/g\"'' /content/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/util.py""")''' /content/stable-diffusion-webui/launch.py
 RUN sed -i -e 's/    start()/    #start()/g' /content/stable-diffusion-webui/launch.py
-RUN cd stable-diffusion-webui && python launch.py --skip-torch-cuda-test
+# RUN cd stable-diffusion-webui && python launch.py --skip-torch-cuda-test
 
 ADD --chown=machinelearning https://huggingface.co/ckpt/sd15/resolve/main/v1-5-pruned-emaonly.ckpt /content/stable-diffusion-webui/models/Stable-diffusion/v1-5-pruned-emaonly.ckpt
 
 
 EXPOSE 7860
 
-CMD cd /content/stable-diffusion-webui && python webui.py --administrator --xformers  --precision full --no-half --update-all-extensions --update-check
+CMD cd /content/stable-diffusion-webui && python webui.py --administrator --xformers  --update-all-extensions
