@@ -6,9 +6,12 @@ RUN apt-get update -y \
     && apt-get install -y libgl1 libglib2.0-0 wget curl htop git git-lfs python3-pip python-is-python3 python3-venv \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd --create-home --shell /bin/bash machinelearning
+RUN adduser --disabled-password --gecos '' machinelearning
 
-WORKDIR /home/machinelearning
+RUN mkdir /content && chown -R machinelearning:machinelearning /content
+
+WORKDIR /content
+
 USER machinelearning
 
 RUN python -m pip install --upgrade pip xformers
