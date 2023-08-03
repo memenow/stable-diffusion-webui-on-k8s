@@ -14,7 +14,11 @@ WORKDIR /content
 
 USER machinelearning
 
-RUN python -m pip install --upgrade pip xformers
+RUN python -m pip install --upgrade pip xformers fastapi uvicorn \
+    && git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui \
+    && cd stable-diffusion-webui \
+    && python3 -m venv venv \
+    && venv/bin/pip install -r requirements.txt
 
 COPY --chown=machinelearning dockerfile_clone_repos.sh ./
 COPY --chown=machinelearning dockerfile_add_files.sh ./

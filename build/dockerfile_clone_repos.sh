@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPOS=("https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+REPOS=(
 "https://github.com/deforum-art/deforum-for-automatic1111-webui"
 "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
 "https://github.com/camenduru/stable-diffusion-webui-huggingface"

@@ -1,14 +1,41 @@
 # stable-diffusion-webui-on-k8s
-stable diffusion webui on k8s
 
-## Requirements
+Stable Diffusion WebUI on k8s
 
-- nvidia GPU
 
-- default StorageClass
+## Prerequisites
 
-- [Helm CLI](https://github.com/helm/helm)
+- Nvidia GPU
 
-## Quick-Start
+- Default StorageClass
 
-`helm install -n NAMESPACE stable-diffusion-webui-on-k8s ./stable-diffusion-webui-on-k8s`
+- [Helm CLI](https://github.com/helm/helm) 
+
+
+## Setup
+
+1. **Building the Container Image**
+   Navigate to the build folder and build your Docker image using the Docker build command, replacing 'YOUR_IMAGE_NAME' with your desired Docker image name.
+
+    ```bash
+    cd ./build && docker build -t YOUR_IMAGE_NAME .
+    ```
+
+2. **Modifying the Helm value file**
+
+   You'll have to adjust your Helm value file, particularly the image name.
+
+3. **Installing the Helm Chart**
+
+   Install the chart into your desired namespace (replace 'NAMESPACE' with your desired namespace)
+
+    ```bash
+    helm install -n NAMESPACE stable-diffusion-webui-on-k8s ./stable-diffusion-webui-on-k8s
+    ```
+
+
+## References
+
+[stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+
+[stable-diffusion-webui-docker](https://github.com/camenduru/stable-diffusion-webui-docker)
