@@ -37,5 +37,3 @@ Stable Diffusion WebUI on k8s
 ## References
 
 [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
-
-[stable-diffusion-webui-docker](https://github.com/camenduru/stable-diffusion-webui-docker)
