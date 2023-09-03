@@ -14,7 +14,7 @@ RUN pip install torch --extra-index-url https://download.pytorch.org/whl/cu113 &
     pip install git+https://github.com/crowsonkb/k-diffusion.git git+https://github.com/TencentARC/GFPGAN.git --prefer-binary && \
     pip install --upgrade pip xformers
 
-RUN git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui
+RUN git clone -b v1.6.0 https://github.com/AUTOMATIC1111/stable-diffusion-webui
 
 ARG scripts=https://raw.githubusercontent.com/camenduru/stable-diffusion-webui-scripts/main/run_n_times.py
 ADD --chown=machinelearning $scripts /content/stable-diffusion-webui/scripts/run_n_times.py
@@ -26,8 +26,6 @@ RUN for repository in $EXTENSIONS ; do \
     done
 
 WORKDIR /content/stable-diffusion-webui
-
-RUN git reset --hard
 
 EXPOSE 7860
 
